@@ -15,7 +15,7 @@ class GroupMessage(models.Model):
     # this sets the group the message will be in
     group = models.ForeignKey(
         ChatGroup,
-        related_name="chat_message",
+        related_name="chat_messages",
         on_delete=models.CASCADE)
     
     # this sets the author of the message
