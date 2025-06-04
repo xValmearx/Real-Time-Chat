@@ -18,7 +18,7 @@ def chat_view(request):
     form = ChatmessageCreateFrom()
 
     # if the user it making a post
-    if request.method == 'POST':
+    if request.htmx:
 
         # select the form
         form = ChatmessageCreateFrom(request.POST)
@@ -36,7 +36,12 @@ def chat_view(request):
             # save the message
             message.save()
 
-            return redirect("home")
+            context = {
+                "message" : message,
+                'user' : request.user
+            }
+
+            return render(request, "a_rtchat/partials/chat_message_p.html",context)
 
     # uses chat.html in templates/a_rtchat as the template
     return render(request, 'a_rtchat/chat.html',
